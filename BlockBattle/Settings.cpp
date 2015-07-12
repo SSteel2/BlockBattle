@@ -3,10 +3,24 @@
 // Definition of static variables
 int Settings::TimeBank       = 0;
 int Settings::TimePerMove    = 0;
+int Settings::TimeRemaining  = 0;
 string Settings::HeroName    = "Hero";
 string Settings::VillainName = "Villain";
 int Settings::FieldHeight    = 0;
 int Settings::FieldWidth     = 0;
+
+int Settings::CurrentRound       = 0;
+PieceType Settings::CurrentPiece = PieceType::NoPiece;
+PieceType Settings::NextPiece    = PieceType::NoPiece;
+Position Settings::PiecePosition (0, 0);
+
+int Settings::HeroPoints = 0;
+int Settings::HeroCombo  = 0;
+vector<vector<int>> Settings::HeroField (0, vector<int> (0, 0));
+
+int Settings::VillainPoints = 0;
+int Settings::VillainCombo  = 0;
+vector<vector<int>> Settings::VillainField (0, vector<int> (0, 0));
 
 
 Settings::Settings ()
@@ -107,6 +121,14 @@ void Settings::ParseUpdate (string updateable, string setting, string value)
 	}
 }
 
+void Settings::ParseAction (string setting, string value)
+{
+	if (setting == "moves")
+	{
+		Settings::TimeRemaining = stoi (value);
+	}
+}
+
 PieceType Settings::ParsePieceType (string pieceType)
 {
 	switch (pieceType[0])
@@ -126,7 +148,7 @@ PieceType Settings::ParsePieceType (string pieceType)
 	case 'O':
 		return PieceType::O;
 	default:
-		return PieceType::I; // this just shouldn't happen
+		return PieceType::NoPiece; // this just shouldn't happen
 	}
 }
 

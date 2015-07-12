@@ -29,6 +29,16 @@ void Bot::Run ()
 			Settings::ParseSetting (tokens[1], tokens[2]);
 		}
 
+		// Updates parsing
+		if (tokens[0] == "update")
+		{
+			Settings::ParseUpdate (tokens[1], tokens[2], tokens[3]);
+		}
 
+		// Action request
+		if (tokens[0] == "action")
+		{
+			Settings::ParseAction (tokens[1], tokens[2]);
+		}
 	}
 }

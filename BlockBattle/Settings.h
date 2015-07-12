@@ -4,6 +4,7 @@
 
 enum PieceType
 {
+	NoPiece,
 	I,
 	T,
 	J,
@@ -31,6 +32,7 @@ public:
 	// Global settings
 	static int TimeBank;
 	static int TimePerMove;
+	static int TimeRemaining;
 	static string HeroName;
 	static string VillainName;
 	static int FieldHeight;
@@ -54,6 +56,7 @@ public:
 
 	static void ParseSetting (string setting, string value);
 	static void ParseUpdate (string updateable, string setting, string value);
+	static void ParseAction (string setting, string value);
 
 protected:
 	static PieceType ParsePieceType (string pieceType);
