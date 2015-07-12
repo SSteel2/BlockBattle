@@ -47,12 +47,12 @@ public:
 	// Hero state
 	static int HeroPoints;
 	static int HeroCombo;
-	static vector<vector<int>> HeroField;
+	static vector<vector<char>> HeroField;
 
 	// Villain state
 	static int VillainPoints;
 	static int VillainCombo;
-	static vector<vector<int>> VillainField;
+	static vector<vector<char>> VillainField;
 
 	static void ParseSetting (string setting, string value);
 	static void ParseUpdate (string updateable, string setting, string value);
@@ -61,7 +61,7 @@ public:
 protected:
 	static PieceType ParsePieceType (string pieceType);
 	static Position ParsePiecePosition (string piecePosition);
-	static vector<vector<int>> ParseField (string fieldString);
+	static vector<vector<char>> ParseField (string fieldString);
 
 private:
 	Settings ();

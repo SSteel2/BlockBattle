@@ -9,5 +9,7 @@ public:
 	~Bot ();
 
 	void Run ();
+
+	void MakeAction ();
 };
 

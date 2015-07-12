@@ -16,11 +16,11 @@ Position Settings::PiecePosition (0, 0);
 
 int Settings::HeroPoints = 0;
 int Settings::HeroCombo  = 0;
-vector<vector<int>> Settings::HeroField (0, vector<int> (0, 0));
+vector<vector<char>> Settings::HeroField (0, vector<char> (0, 0));
 
 int Settings::VillainPoints = 0;
 int Settings::VillainCombo  = 0;
-vector<vector<int>> Settings::VillainField (0, vector<int> (0, 0));
+vector<vector<char>> Settings::VillainField (0, vector<char> (0, 0));
 
 
 Settings::Settings ()
@@ -158,11 +158,11 @@ Position Settings::ParsePiecePosition (string piecePosition)
 	return Position (stoi (piecePosition.substr (0, delimiterPosition)), stoi (piecePosition.substr (delimiterPosition + 1, string::npos)));
 }
 
-vector<vector<int>> Settings::ParseField (string fieldString)
+vector<vector<char>> Settings::ParseField (string fieldString)
 {
 	// Rows full of columns
 
-	vector<vector<int>> field (Settings::FieldHeight, vector<int> (Settings::FieldWidth, 0));
+	vector<vector<char>> field (Settings::FieldHeight, vector<char> (Settings::FieldWidth, 0));
 
 	for (int i = 0; i < Settings::FieldHeight; ++i)
 		for (int j = 0; j < Settings::FieldWidth; ++j)
