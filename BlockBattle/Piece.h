@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -21,6 +22,8 @@ class Piece
 protected:
 	PieceType mPieceType;
 	int mRotationCount;
+	int mWidth = 0;
+	int mHeight = 0;
 
 public:
 	vector<vector<char>> mField;
@@ -30,5 +33,10 @@ public:
 
 	PieceType GetPieceType ();
 	int GetRotationCount ();
+	int GetWidth ();
+	int GetHeight ();
+
+private:
+	void CalculateDimensions ();
 };
 
