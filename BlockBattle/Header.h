@@ -8,5 +8,6 @@
 
 using namespace std;
 
-#include "Bot.h"
+#include "Piece.h"
 #include "Settings.h"
+#include "Bot.h"

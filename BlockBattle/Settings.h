@@ -2,18 +2,6 @@
 
 #include "Header.h"
 
-enum PieceType
-{
-	NoPiece,
-	I,
-	T,
-	J,
-	L,
-	S,
-	Z,
-	O
-};
-
 struct Position
 {
 	int X;

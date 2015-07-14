@@ -3,6 +3,7 @@
 
 Bot::Bot ()
 {
+	InitializePieces ();
 }
 
 
@@ -46,4 +47,28 @@ void Bot::Run ()
 void Bot::MakeAction ()
 {
 
+}
+
+
+Piece* Bot::GetPiece (PieceType type)
+{
+	for each (auto piece in mPieces)
+	{
+		if (piece->GetPieceType () == type)
+			return piece;
+	}
+	return nullptr;
+}
+
+
+void Bot::InitializePieces ()
+{
+	mPieces.reserve (7);
+	mPieces.push_back (new Piece (PieceType::I, 2, { { 0, 0, 0, 0 }, { 1, 1, 1, 1 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }));
+	mPieces.push_back (new Piece (PieceType::J, 4, { { 1, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 } }));
+	mPieces.push_back (new Piece (PieceType::L, 4, { { 0, 0, 1 }, { 1, 1, 1 }, { 0, 0, 0 } }));
+	mPieces.push_back (new Piece (PieceType::O, 1, { { 1, 1 }, { 1, 1 } }));
+	mPieces.push_back (new Piece (PieceType::S, 2, { { 0, 1, 1 }, { 1, 1, 0 }, { 0, 0, 0 } }));
+	mPieces.push_back (new Piece (PieceType::T, 4, { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 0, 0 } }));
+	mPieces.push_back (new Piece (PieceType::Z, 2, { { 1, 1, 0 }, { 0, 1, 1 }, { 0, 0, 0 } }));
 }
