@@ -16,6 +16,7 @@ public:
 
 	Piece* GetPiece (PieceType type);
 
+
 public:
 	void InitializePieces ();
 

@@ -9,9 +9,22 @@ struct Position
 
 	Position (int x, int y)
 	{
+		SetPosition (x, y);
+	}
+
+	void SetPosition (int x, int y)
+	{
 		X = x;
 		Y = y;
 	}
+};
+
+struct DeltaPly
+{
+	Position Location;
+	PieceType Piece;
+	Rotation CurrentRotation;
+	int evaluationPoints;
 };
 
 class Settings

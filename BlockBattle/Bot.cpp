@@ -53,10 +53,8 @@ void Bot::MakeAction ()
 Piece* Bot::GetPiece (PieceType type)
 {
 	for each (auto piece in mPieces)
-	{
 		if (piece->GetPieceType () == type)
 			return piece;
-	}
 	return nullptr;
 }
 

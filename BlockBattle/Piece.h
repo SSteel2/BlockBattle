@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -15,6 +14,14 @@ enum PieceType
 	S,
 	Z,
 	O
+};
+
+enum Rotation
+{
+	Degrees0 = 0,
+	Degrees90,
+	Degrees180,
+	Degrees270
 };
 
 class Piece
