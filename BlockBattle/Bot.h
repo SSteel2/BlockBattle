@@ -2,8 +2,6 @@
 
 #include "Header.h"
 
-struct DeltaPly;
-
 class DecisionTreeNode
 {
 protected:

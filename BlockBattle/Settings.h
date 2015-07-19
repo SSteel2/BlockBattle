@@ -2,31 +2,6 @@
 
 #include "Header.h"
 
-struct Position
-{
-	int X;
-	int Y;
-
-	Position (int x, int y)
-	{
-		SetPosition (x, y);
-	}
-
-	void SetPosition (int x, int y)
-	{
-		X = x;
-		Y = y;
-	}
-};
-
-struct DeltaPly
-{
-	Position Location;
-	PieceType Piece;
-	Rotation CurrentRotation;
-	int evaluationPoints;
-};
-
 class Settings
 {
 public:
@@ -48,12 +23,12 @@ public:
 	// Hero state
 	static int HeroPoints;
 	static int HeroCombo;
-	static vector<vector<char>> HeroField;
+	static Field HeroField;
 
 	// Villain state
 	static int VillainPoints;
 	static int VillainCombo;
-	static vector<vector<char>> VillainField;
+	static Field VillainField;
 
 	static void ParseSetting (string setting, string value);
 	static void ParseUpdate (string updateable, string setting, string value);
@@ -62,7 +37,7 @@ public:
 protected:
 	static PieceType ParsePieceType (string pieceType);
 	static Position ParsePiecePosition (string piecePosition);
-	static vector<vector<char>> ParseField (string fieldString);
+	static Field ParseField (string fieldString); // Fix this
 
 private:
 	Settings ();

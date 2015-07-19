@@ -1,28 +1,6 @@
 #pragma once
 
-#include <vector>
-
-using namespace std;
-
-enum PieceType
-{
-	NoPiece,
-	I,
-	T,
-	J,
-	L,
-	S,
-	Z,
-	O
-};
-
-enum Rotation
-{
-	Degrees0 = 0,
-	Degrees90,
-	Degrees180,
-	Degrees270
-};
+#include "Header.h"
 
 class Piece
 {
@@ -42,7 +20,8 @@ public:
 	int GetRotationCount ();
 	int GetWidth ();
 	int GetHeight ();
-	vector<vector<char>> GetRotation (Rotation rotation);
+	Field GetRotationField (Rotation rotation);
+	bool CheckOverlay (DeltaPly* ply, Field gameField);
 
 private:
 	void CalculateDimensions ();

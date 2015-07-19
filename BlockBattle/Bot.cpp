@@ -22,7 +22,7 @@ void Bot::Run ()
 			continue;
 
 		stringstream stream (line);
-		vector<string> tokens{ istream_iterator < string > {stream}, istream_iterator < string > {} };
+		vector<string> tokens { istream_iterator<string> {stream}, istream_iterator<string> {} };
 
 		// Updates parsing
 		if (tokens[0] == "update")
@@ -83,9 +83,27 @@ vector<DeltaPly*> Bot::GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> 
 	Piece* currentPiece = GetPiece (Settings::CurrentPiece);
 	vector<DeltaPly*> possibleMoves (currentPiece->GetRotationCount () * 9);
 
-	//for (int rotation = 0; rotation < currentPiece->GetRotationCount (); rotation++)
-	//{
-	//	//for (int i = 0; )
-	//}
+	for (int rotation = 0; rotation < currentPiece->GetRotationCount (); rotation++)
+	{
+		auto pieceField = currentPiece->GetRotationField ((Rotation)rotation);
+		for (int i = 0; i < Settings::FieldWidth - (i % 2 == 0 ? currentPiece->GetWidth () : currentPiece->GetHeight ()) + 1; i++)
+		{
+			// TODO: This should be optimized
+
+			// Find bottommost open cell in column
+			unsigned int index = -1;
+			for (unsigned int j = 0; j < Settings::FieldHeight; j++)
+			{
+				if (index == -1 && Settings::HeroField[j][i] == 0)
+					index = i;
+				else if (index != -1 && Settings::HeroField[j][i] != 0)
+					index = -1;
+			}
+
+			// Find position in which the piece fits
+			
+		}
+	}
+
 	return possibleMoves;
 }

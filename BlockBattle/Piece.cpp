@@ -1,7 +1,7 @@
 #include "Piece.h"
 
 
-Piece::Piece (PieceType type, int rotationCount, vector<vector<char>>&& field)
+Piece::Piece (PieceType type, int rotationCount, Field&& field)
 {
 	mPieceType = type;
 	mRotationCount = rotationCount;
@@ -39,7 +39,7 @@ int Piece::GetWidth ()
 }
 
 
-vector<vector<char>> Piece::GetRotation (Rotation rotation)
+Field Piece::GetRotationField (Rotation rotation)
 {
 	return mField[rotation % mRotationCount];
 }
@@ -77,7 +77,7 @@ void Piece::PopulateRotations ()
 {
 	for (int rotation = 1; rotation < mRotationCount; rotation++)
 	{
-		mField.push_back (vector<vector<char>> (mField[0].size (), vector<char> (mField[0][0].size ())));
+		mField.push_back (Field (mField[0].size (), vector<char> (mField[0][0].size ())));
 		
 		unsigned int rows = mField[0].size ();
 		unsigned int columns = mField[0][0].size ();
@@ -85,5 +85,18 @@ void Piece::PopulateRotations ()
 		for (unsigned int i = 0; i < rows; i++)
 			for (unsigned int j = 0; j < columns; j++)
 				mField[rotation][i][j] = mField[rotation - 1][j][rows - 1 - i];
+	}
+}
+
+
+bool Piece::CheckOverlay (DeltaPly* ply, Field gameField)
+{
+	Field pieceField = GetRotationField (ply->CurrentRotation);
+	for (int i = 0; i < pieceField.size (); i++)
+	{
+		for (int j = 0; j < pieceField.size (); j++)
+		{
+
+		}
 	}
 }
