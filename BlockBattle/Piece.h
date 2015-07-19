@@ -32,9 +32,9 @@ protected:
 	int mWidth = 0;
 	int mHeight = 0;
 
-public:
-	vector<vector<char>> mField;
+	vector<vector<vector<char>>> mField;
 
+public:
 	Piece (PieceType type, int rotationCount, vector<vector<char>>&& field);
 	~Piece ();
 
@@ -42,8 +42,10 @@ public:
 	int GetRotationCount ();
 	int GetWidth ();
 	int GetHeight ();
+	vector<vector<char>> GetRotation (Rotation rotation);
 
 private:
 	void CalculateDimensions ();
+	void PopulateRotations ();
 };
 

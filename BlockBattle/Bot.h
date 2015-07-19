@@ -2,10 +2,19 @@
 
 #include "Header.h"
 
+struct DeltaPly;
+
+class DecisionTreeNode
+{
+protected:
+	vector<DeltaPly*> mChildren;
+};
+
 class Bot
 {
 protected:
 	vector<Piece*> mPieces;
+	DecisionTreeNode mDecisionRoot;
 
 public:
 	Bot ();
@@ -15,10 +24,11 @@ public:
 	void MakeAction ();
 
 	Piece* GetPiece (PieceType type);
+	void PopulateDecisionTree ();
 
-
-public:
+private:
 	void InitializePieces ();
+	vector<DeltaPly*> GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> queuedMoves);
 
 };
 

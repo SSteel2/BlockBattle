@@ -5,7 +5,7 @@ Piece::Piece (PieceType type, int rotationCount, vector<vector<char>>&& field)
 {
 	mPieceType = type;
 	mRotationCount = rotationCount;
-	mField = field;
+	mField.push_back (field);
 	CalculateDimensions ();
 }
 
@@ -27,13 +27,31 @@ int Piece::GetRotationCount ()
 }
 
 
+int Piece::GetHeight ()
+{
+	return mHeight;
+}
+
+
+int Piece::GetWidth ()
+{
+	return mWidth;
+}
+
+
+vector<vector<char>> Piece::GetRotation (Rotation rotation)
+{
+	return mField[rotation % mRotationCount];
+}
+
+
 void Piece::CalculateDimensions ()
 {
-	for (unsigned int i = 0; i < mField.size (); i++)
+	for (unsigned int i = 0; i < mField[0].size (); i++)
 	{
-		for (unsigned int j = 0; j < mField[i].size (); j++)
+		for (unsigned int j = 0; j < mField[0][i].size (); j++)
 		{
-			if (mField[i][j] == 1)
+			if (mField[0][i][j] == 1)
 			{
 				mHeight++;
 				break;
@@ -41,15 +59,31 @@ void Piece::CalculateDimensions ()
 		}
 	}
 
-	for (unsigned int i = 0; i < mField[0].size (); i++)
+	for (unsigned int i = 0; i < mField[0][0].size (); i++)
 	{
-		for (unsigned int j = 0; j < mField.size (); j++)
+		for (unsigned int j = 0; j < mField[0].size (); j++)
 		{
-			if (mField[j][i] == 1)
+			if (mField[0][j][i] == 1)
 			{
 				mWidth++;
 				break;
 			}
 		}
+	}
+}
+
+
+void Piece::PopulateRotations ()
+{
+	for (int rotation = 1; rotation < mRotationCount; rotation++)
+	{
+		mField.push_back (vector<vector<char>> (mField[0].size (), vector<char> (mField[0][0].size ())));
+		
+		unsigned int rows = mField[0].size ();
+		unsigned int columns = mField[0][0].size ();
+		
+		for (unsigned int i = 0; i < rows; i++)
+			for (unsigned int j = 0; j < columns; j++)
+				mField[rotation][i][j] = mField[rotation - 1][j][rows - 1 - i];
 	}
 }

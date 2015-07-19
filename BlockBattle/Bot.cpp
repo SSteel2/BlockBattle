@@ -70,3 +70,22 @@ void Bot::InitializePieces ()
 	mPieces.push_back (new Piece (PieceType::T, 4, { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 0, 0 } }));
 	mPieces.push_back (new Piece (PieceType::Z, 2, { { 1, 1, 0 }, { 0, 1, 1 }, { 0, 0, 0 } }));
 }
+
+
+void Bot::PopulateDecisionTree ()
+{
+	// Populate first 2 levels of tree
+}
+
+
+vector<DeltaPly*> Bot::GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> queuedMoves)
+{
+	Piece* currentPiece = GetPiece (Settings::CurrentPiece);
+	vector<DeltaPly*> possibleMoves (currentPiece->GetRotationCount () * 9);
+
+	//for (int rotation = 0; rotation < currentPiece->GetRotationCount (); rotation++)
+	//{
+	//	//for (int i = 0; )
+	//}
+	return possibleMoves;
+}
