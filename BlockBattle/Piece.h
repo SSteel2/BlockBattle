@@ -10,10 +10,10 @@ protected:
 	int mWidth = 0;
 	int mHeight = 0;
 
-	vector<vector<vector<char>>> mField;
+	vector<Field> mField;
 
 public:
-	Piece (PieceType type, int rotationCount, vector<vector<char>>&& field);
+	Piece (PieceType type, int rotationCount, Field&& field);
 	~Piece ();
 
 	PieceType GetPieceType ();
@@ -22,6 +22,7 @@ public:
 	int GetHeight ();
 	Field GetRotationField (Rotation rotation);
 	bool CheckOverlay (DeltaPly* ply, Field gameField);
+	bool CheckOverlay (Position position, Rotation rotation, Field gameField);
 
 private:
 	void CalculateDimensions ();

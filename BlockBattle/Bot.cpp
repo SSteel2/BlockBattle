@@ -1,6 +1,17 @@
 #include "Bot.h"
 
 
+DecisionTreeNode::DecisionTreeNode () :
+	mChildren ()
+{
+}
+
+DecisionTreeNode::DecisionTreeNode (vector<DeltaPly*> children)
+{
+	mChildren = children;
+}
+
+
 Bot::Bot ()
 {
 	InitializePieces ();
@@ -74,13 +85,15 @@ void Bot::InitializePieces ()
 
 void Bot::PopulateDecisionTree ()
 {
-	// Populate first 2 levels of tree
+	// TODO: Populate first 2 levels of tree
+	// Currently only one is being generated
+	mDecisionRoot = GetPossibleMoves (Settings::CurrentPiece, vector<DeltaPly*> ());
 }
 
 
-vector<DeltaPly*> Bot::GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> queuedMoves)
+DecisionTreeNode Bot::GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> queuedMoves)
 {
-	Piece* currentPiece = GetPiece (Settings::CurrentPiece);
+	Piece* currentPiece = GetPiece (pieceType);
 	vector<DeltaPly*> possibleMoves (currentPiece->GetRotationCount () * 9);
 
 	for (int rotation = 0; rotation < currentPiece->GetRotationCount (); rotation++)
@@ -91,19 +104,28 @@ vector<DeltaPly*> Bot::GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> 
 			// TODO: This should be optimized
 
 			// Find bottommost open cell in column
-			unsigned int index = -1;
-			for (unsigned int j = 0; j < Settings::FieldHeight; j++)
+			int index = -1;
+			for (int j = Settings::FieldHeight; j >= 0; j++)
 			{
-				if (index == -1 && Settings::HeroField[j][i] == 0)
-					index = i;
-				else if (index != -1 && Settings::HeroField[j][i] != 0)
-					index = -1;
+				if (Settings::HeroField[j][i] == 1)
+				{
+					index = j + 1;
+				}
 			}
 
 			// Find position in which the piece fits
-			
+			for (int j = index; j < Settings::FieldHeight; j++)
+			{
+				// TODO: Should pass constructed game field
+				if (!currentPiece->CheckOverlay (Position (i, j), (Rotation)rotation, Settings::HeroField))
+				{
+					possibleMoves.push_back (new DeltaPly (Position (i, j), pieceType, (Rotation)rotation, 0));
+				}
+			}
+
+			// TODO: Shadow situations
 		}
 	}
 
-	return possibleMoves;
+	return DecisionTreeNode (possibleMoves);
 }

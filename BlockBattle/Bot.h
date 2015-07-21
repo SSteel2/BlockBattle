@@ -2,10 +2,16 @@
 
 #include "Header.h"
 
+class Piece;
+
 class DecisionTreeNode
 {
 protected:
 	vector<DeltaPly*> mChildren;
+
+public:
+	DecisionTreeNode ();
+	DecisionTreeNode (vector<DeltaPly*> children);
 };
 
 class Bot
@@ -26,7 +32,7 @@ public:
 
 private:
 	void InitializePieces ();
-	vector<DeltaPly*> GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> queuedMoves);
+	DecisionTreeNode GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> queuedMoves);
 
 };
 

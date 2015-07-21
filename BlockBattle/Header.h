@@ -38,6 +38,18 @@ struct Position
 		SetPosition (x, y);
 	}
 
+	Position (Position& position)
+	{
+		X = position.X;
+		Y = position.Y;
+	}
+
+	void operator= (Position position)
+	{
+		X = position.X;
+		Y = position.Y;
+	}
+
 	void SetPosition (int x, int y)
 	{
 		X = x;
@@ -50,7 +62,15 @@ struct DeltaPly
 	Position Location;
 	PieceType Piece;
 	Rotation CurrentRotation;
-	int evaluationPoints;
+	int EvaluationPoints;
+
+	DeltaPly (Position location, PieceType pieceType, Rotation rotation, int points) :
+		Location (location)
+	{
+		Piece            = pieceType;
+		CurrentRotation  = rotation;
+		EvaluationPoints = points;
+	}
 };
 
 typedef vector<vector<char>> Field;

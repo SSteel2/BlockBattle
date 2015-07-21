@@ -7,6 +7,7 @@ Piece::Piece (PieceType type, int rotationCount, Field&& field)
 	mRotationCount = rotationCount;
 	mField.push_back (field);
 	CalculateDimensions ();
+	PopulateRotations ();
 }
 
 
@@ -91,12 +92,18 @@ void Piece::PopulateRotations ()
 
 bool Piece::CheckOverlay (DeltaPly* ply, Field gameField)
 {
-	Field pieceField = GetRotationField (ply->CurrentRotation);
-	for (int i = 0; i < pieceField.size (); i++)
-	{
-		for (int j = 0; j < pieceField.size (); j++)
-		{
+	return CheckOverlay (ply->Location, ply->CurrentRotation, gameField);
+}
 
-		}
-	}
+
+bool Piece::CheckOverlay (Position position, Rotation rotation, Field gameField)
+{
+	Field pieceField = GetRotationField (rotation);
+
+	for (unsigned int i = 0; i < pieceField.size (); i++)
+		for (unsigned int j = 0; j < pieceField.size (); j++)
+			if (pieceField[i][j] == 1 && gameField[position.X + i][position.Y + j] != 0)
+				return true;
+
+	return true;
 }
