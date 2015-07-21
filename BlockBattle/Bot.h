@@ -25,14 +25,15 @@ public:
 	~Bot ();
 
 	void Run ();
+
+protected:
+	void InitializePieces ();
+
 	void MakeAction ();
+	void PopulateDecisionTree ();
+	void EvaluatePositions ();
 
 	Piece* GetPiece (PieceType type);
-	void PopulateDecisionTree ();
-
-private:
-	void InitializePieces ();
 	DecisionTreeNode GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> queuedMoves);
-
 };
 

@@ -57,7 +57,8 @@ void Bot::Run ()
 
 void Bot::MakeAction ()
 {
-
+	PopulateDecisionTree ();
+	EvaluatePositions ();
 }
 
 
@@ -129,3 +130,11 @@ DecisionTreeNode Bot::GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> q
 
 	return DecisionTreeNode (possibleMoves);
 }
+
+
+void Bot::EvaluatePositions ()
+{
+	// Evaluates all positions and assigns them a value
+}
+
+
