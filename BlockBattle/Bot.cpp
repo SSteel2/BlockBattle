@@ -1,14 +1,36 @@
 #include "Bot.h"
 
 
-DecisionTreeNode::DecisionTreeNode () :
-	mChildren ()
+DecisionTreeNode::DecisionTreeNode () : mChildren ()
 {
 }
 
+
+DecisionTreeNode::~DecisionTreeNode ()
+{
+	delete mMove;
+}
+
+
+DecisionTreeNode::DecisionTreeNode (DeltaPly* ply) : mChildren ()
+{
+	mMove = ply;
+}
+
+
 DecisionTreeNode::DecisionTreeNode (vector<DeltaPly*> children)
 {
-	mChildren = children;
+	mMove = new DeltaPly ();
+	AddChildren (children);
+}
+
+
+void DecisionTreeNode::AddChildren (vector<DeltaPly*> children)
+{
+	for each (auto child in children)
+	{
+		mChildren.push_back (new DecisionTreeNode (child));
+	}
 }
 
 
@@ -135,6 +157,8 @@ DecisionTreeNode Bot::GetPossibleMoves (PieceType pieceType, vector<DeltaPly*> q
 void Bot::EvaluatePositions ()
 {
 	// Evaluates all positions and assigns them a value
+
+
 }
 
 

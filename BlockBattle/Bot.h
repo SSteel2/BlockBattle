@@ -7,11 +7,16 @@ class Piece;
 class DecisionTreeNode
 {
 protected:
-	vector<DeltaPly*> mChildren;
+	vector<DecisionTreeNode*> mChildren;
+	DeltaPly* mMove;
 
 public:
 	DecisionTreeNode ();
+	~DecisionTreeNode ();
+	DecisionTreeNode (DeltaPly* ply);
 	DecisionTreeNode (vector<DeltaPly*> children);
+
+	void AddChildren (vector<DeltaPly*> children);
 };
 
 class Bot

@@ -64,6 +64,15 @@ struct DeltaPly
 	Rotation CurrentRotation;
 	int EvaluationPoints;
 
+	// Should be only used for root node
+	DeltaPly () :
+		Location (0, 0)
+	{
+		Piece = PieceType::NoPiece;
+		CurrentRotation = Rotation::Degrees0;
+		EvaluationPoints = 0;
+	}
+
 	DeltaPly (Position location, PieceType pieceType, Rotation rotation, int points) :
 		Location (location)
 	{
